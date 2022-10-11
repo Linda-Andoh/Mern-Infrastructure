@@ -1,6 +1,9 @@
 import { useState } from "react"
+import { signUp } from '../utilities/users-service';
 
 export default function SignUpForm (props) {
+
+ const [errorState, setErrorState] = useState('');   
 
  const [formData, setFormData] = useState({
     name: '',
@@ -11,12 +14,27 @@ export default function SignUpForm (props) {
 
 const [disable, setDisable] = useState(formData.password !== formData.confirm)
 
-const handleSubmit = (event) => {
+const handleSubmit = async (event) => {
     event.preventDefault();
-    alert(JSON.stringify(formData));
+    // alert(JSON.stringify(formData));
+    try {
+
+    const payLoad = {
+        email: formData.email,
+        password: formData.password,
+        name: formData.name
+    }
+
+    const user = await signUp(formData);
+    console.log(user);
+
+    } catch {
+       setErrorState('Sign Up Failed - Try Again');
+    }
 }
 
 const handleChange = (event) => {
+    console.log(event.target);
     setFormData({...formData, [event.target.name]: event.target.value });
     // setDisable(formData.password !== formData.confirm);
 }
@@ -61,6 +79,7 @@ const handleChange = (event) => {
                 />
                 <button type="submit" disable={disable}>SIGN UP</button>
           </form>
+          <p className="error-message">{errorState}</p>
         </div>        
 
         </>
