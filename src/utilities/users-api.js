@@ -21,7 +21,7 @@ const response = await axios.post(BASE_URL, userData)
 //This is equivalent to what is up on line 7 to 16.
 
   // Check if request was successful
-  if (response.status === 200) {
+  if (response.status === 201) {
     // res.json() will resolve to the JWT
     return response.data
   } else {

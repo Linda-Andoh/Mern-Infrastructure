@@ -25,8 +25,8 @@ const handleSubmit = async (event) => {
         name: formData.name
     }
 
-    const user = await signUp(formData);
-    console.log(user);
+    const user = await signUp(payload);
+    props.setUser(user);
 
     } catch {
        setErrorState('Sign Up Failed - Try Again');
@@ -34,7 +34,7 @@ const handleSubmit = async (event) => {
 }
 
 const handleChange = (event) => {
-    console.log(event.target);
+    // console.log(event.target);
     setFormData({...formData, [event.target.name]: event.target.value });
     // setDisable(formData.password !== formData.confirm);
 }

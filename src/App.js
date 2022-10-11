@@ -1,31 +1,29 @@
-import logo from './logo.svg';
 import './App.css';
 import { useState } from 'react';
 import Auth from './pages/Auth';
 import NewOrder from './pages/NewOrder';
 import OrderHistory from './pages/OrderHistory';
-import { Routes, Route } from 'react-router-dom'
 import NavBar from './components/NavBar';
+import { Routes, Route } from 'react-router-dom'
+import { getUser} from './utilities/users-service';
 
 function App() {
 
-  const [user, setUser] = useState(null)
-
-
+  const [user, setUser] = useState(getUser());
 
   return (
     <div className="App">
       {
         user ?
         <>
-        <NavBar />
+        <NavBar user={user} />
           <Routes>
             <Route path="/orders/new" element={<NewOrder />} />
             <Route path="/orders" element={<OrderHistory />} />
           </Routes>
         </>
          :
-         <Auth />
+         <Auth setUser={setUser} />
       }   
     
     </div>
