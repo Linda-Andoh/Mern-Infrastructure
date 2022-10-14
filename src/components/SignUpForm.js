@@ -25,7 +25,7 @@ const handleSubmit = async (event) => {
         name: formData.name
     }
 
-    const user = await signUp(payload);
+    const user = await signUp(payLoad);
     props.setUser(user);
 
     } catch {
@@ -84,4 +84,5 @@ const handleChange = (event) => {
 
         </>
     )
+    
 }
